@@ -1,6 +1,7 @@
 "use server";
 
 import { FilterQuery, SortOrder } from "mongoose";
+import mongoose from "mongoose";
 import { revalidatePath } from "next/cache";
 
 import Community from "../models/community.model";
@@ -179,5 +180,45 @@ export async function getActivity(userId: string) {
 	} catch (error) {
 		console.error("Error fetching replies: ", error);
 		throw error;
+	}
+}
+
+export async function likeThreadUser(userId: string, threadId: string) {
+	connectToDB();
+
+	try {
+		const user = await User.findOne({ id: userId });
+
+		user.liked.push(threadId);
+
+		await user.save();
+	} catch (err) {
+		console.error("Error liking:", err);
+		throw new Error("Unable to like");
+	}
+}
+
+export async function unlikeThreadUser(userId: string, threadId: string) {
+	connectToDB();
+
+	try {
+		await User.updateOne({ id: userId }, { $pull: { liked: threadId } });
+	} catch (err) {
+		console.error("Error unliking:", err);
+		throw new Error("Unable to unlike");
+	}
+}
+
+export async function hasUserLikedThread(userId: string, threadId: string) {
+	try {
+		const user = await User.findOne({
+			id: userId,
+			liked: { $in: [threadId] },
+		});
+
+		return user !== null;
+	} catch (error) {
+		console.error("Error checking if user liked thread:", error);
+		throw new Error("Unable to determine if the user liked the thread");
 	}
 }

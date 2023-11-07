@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import { fetchUser } from "@/lib/actions/user.actions";
+import { currentUser } from "@clerk/nextjs";
 import { formatDateString } from "@/lib/utils";
 import DeleteThread from "../forms/DeleteThread";
+import Like from "../shared/Like";
 
 interface Props {
 	id: string;
@@ -28,7 +30,7 @@ interface Props {
 	isComment?: boolean;
 }
 
-function ThreadCard({
+async function ThreadCard({
 	id,
 	currentUserId,
 	parentId,
@@ -39,6 +41,9 @@ function ThreadCard({
 	comments,
 	isComment,
 }: Props) {
+	const user = await currentUser();
+	const userInfo = await fetchUser(user?.id!);
+
 	return (
 		<article
 			className={`flex w-full flex-col rounded-xl ${
@@ -71,13 +76,7 @@ function ThreadCard({
 
 						<div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
 							<div className="flex gap-3.5">
-								<Image
-									src="/assets/heart-gray.svg"
-									alt="heart"
-									width={24}
-									height={24}
-									className="cursor-pointer object-contain"
-								/>
+								<Like threadId={id} userId={user?.id!} />
 								<Link href={`/thread/${id}`}>
 									<Image
 										src="/assets/reply.svg"
