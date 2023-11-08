@@ -273,3 +273,18 @@ export async function unlikeThread(threadId: string) {
 		throw new Error("Unable to unLike");
 	}
 }
+
+export async function getThreadLikesCount(threadId: string) {
+	connectToDB();
+
+	try {
+		const thread = await Thread.findById(threadId).select("likes");
+		if (thread) {
+			return thread.likes;
+		} else {
+			throw new Error("Thread not found");
+		}
+	} catch (error) {
+		throw new Error("Unable to retrieve thread likes count");
+	}
+}
