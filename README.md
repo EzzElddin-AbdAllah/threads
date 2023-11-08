@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Threads - A Next.js Social Media App
 
-## Getting Started
+![Threads Logo](public/assets/logo.svg)
 
-First, run the development server:
+**Threads** is a social media app built with Next.js. It allows users to create threads, post updates, and interact with other users. This README will provide you with information on setting up, running, and using Threads.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Before getting started with Threads, ensure you have the following prerequisites installed on your system:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Node.js
+- npm
+- MongoDB
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Installation
 
-## Learn More
+1. Clone the repository:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   git clone https://github.com/EzzElddin-AbdAllah/threads
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   cd threads
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2. Install the project dependencies: `npm install`
+3. Create a .env.local File:
 
-## Deploy on Vercel
+   Create a `.env.local` file in the root of your project and add the following environment variables:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```plaintext
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your-public-key>
+   CLERK_SECRET_KEY=<your-secret-key>
+   NEXT_CLERK_WEBHOOK_SECRET=<webhook-secret>
+   NEXT_PUBLIC_CLERK_SIGN_IN_URL=<sign-in-url>
+   NEXT_PUBLIC_CLERK_SIGN_UP_URL=<sign-up-url>
+   NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=<after-sign-in-url>
+   NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=<after-sign-up-url>
+   MONGODB_URL=<your-mongodb-url>
+   UPLOADTHING_SECRET=<your-uploadthing-secret>
+   UPLOADTHING_APP_ID=<your-uploadthing-app-id>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   ```
+
+4. npm run dev
+
+The app should now be running at http://localhost:3000.
+
+## Usage
+
+- Sign in or sign up to start using the app.
+- Explore threads, communities, and profiles.
+- Create new threads, post comments, and interact with other users.
+
+## Live Deployed Version
+
+You can access the live version of Threads by following this link: [Live Threads App](https://threads-ezzelddin-abdallahs-projects.vercel.app).
+
+Feel free to explore the app and interact with other users in real-time.
+
+## Screenshots
+
+Here are some screenshots of the Threads app:
+
+- **Home Page:**
+
+  ![Home Page](/screenshots/home.png)
+
+- **Profile Page:**
+
+  ![Profile Page](/screenshots/profile.png)
+
+- **Communities View:**
+
+  ![Communities View](/screenshots/communities.png)
