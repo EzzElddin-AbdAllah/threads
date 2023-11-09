@@ -34,9 +34,9 @@ const userSchema = new mongoose.Schema({
 	],
 	liked: [
 		{
-			unique: true,
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "Thread",
+			unique: true,
 		},
 	],
 });
